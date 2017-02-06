@@ -1,12 +1,13 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Ignore everything in this directory
+target
+.classpath
+.settings
+.project
+*.iml
+*.iws
+*.ipr
+*~
+.idea
+features/org.wso2.carbon.lcm.feature/resources/database/
+features/org.wso2.carbon.lcm.feature/resources/database/WSO2LIFECYCLE_DB.mv.db
+features/org.wso2.carbon.lcm.feature/resources/database/WSO2LIFECYCLE_DB.h2.db
