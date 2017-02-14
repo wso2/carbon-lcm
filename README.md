@@ -1,5 +1,11 @@
 # Lifecycle Management Component
 
+---
+|  Branch | Build Status |
+| :------ |:------------ |
+| master  | [![Build Status](https://wso2.org/jenkins/buildStatus/icon?job=carbon-lcm)](https://wso2.org/jenkins/job/carbon-lcm/) |
+---
+
 This component provides lifecycle management capability to any of the resource type which requires lifecycle capability.
 This will store all the data related to lifecycles in its side. Component will provide an unique id to outside to
 maintain tha mapping between the lifecycle data external object (For ex: API, APP, REST Service)
