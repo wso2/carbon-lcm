@@ -28,7 +28,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>org.wso2.carbon.lcm.feature</artifactId>
+    <artifactId>org.wso2.carbon.lcm.sql.feature</artifactId>
     <packaging>pom</packaging>
 
     <dependencies>
@@ -37,8 +37,8 @@
             <artifactId>org.wso2.carbon.lcm.sql</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.lcm</groupId>
-            <artifactId>org.wso2.carbon.lcm.core</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
 
@@ -161,10 +161,6 @@
                             <bundles>
                                 <bundle>
                                     <symbolicName>org.wso2.carbon.lcm.sql</symbolicName>
-                                    <version>${project.parent.version}</version>
-                                </bundle>
-                                <bundle>
-                                    <symbolicName>org.wso2.carbon.lcm.core</symbolicName>
                                     <version>${project.parent.version}</version>
                                 </bundle>
                             </bundles>

@@ -43,7 +43,8 @@
     <modules>
         <module>components/org.wso2.carbon.lcm.sql</module>
         <module>components/org.wso2.carbon.lcm.core</module>
-        <module>features/org.wso2.carbon.lcm.feature</module>
+        <module>features/org.wso2.carbon.lcm.sql.feature</module>
+        <module>features/org.wso2.carbon.lcm.core.feature</module>
     </modules>
 
     <build>
@@ -161,6 +162,7 @@
 
     <properties>
         <carbon.lcm.version>1.0.0-SNAPSHOT</carbon.lcm.version>
+        <carbon.lcm.package.import.version.range>[1.0.0, 2.0.0)</carbon.lcm.package.import.version.range>
         <osgi.framework.import.version.range>[1.8.0, 2.0.0)</osgi.framework.import.version.range>
         <slf4j.logging.package.import.version.range>[1.7.1, 2.0.0)</slf4j.logging.package.import.version.range>
         <snakeyaml.version>1.16.0.wso2v1</snakeyaml.version>

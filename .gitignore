@@ -8,6 +8,6 @@ target
 *.ipr
 *~
 .idea
-features/org.wso2.carbon.lcm.feature/resources/database/
-features/org.wso2.carbon.lcm.feature/resources/database/WSO2LIFECYCLE_DB.mv.db
-features/org.wso2.carbon.lcm.feature/resources/database/WSO2LIFECYCLE_DB.h2.db
+features/org.wso2.carbon.lcm.sql.feature/resources/database/
+features/org.wso2.carbon.lcm.sql.feature/resources/database/WSO2LIFECYCLE_DB.mv.db
+features/org.wso2.carbon.lcm.sql.feature/resources/database/WSO2LIFECYCLE_DB.h2.db

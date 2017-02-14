@@ -157,9 +157,9 @@
         </dependency>
     </dependencies>
     <properties>
-        <private.package>org.wso2.carbon.lcm.internal.*,</private.package>
+        <private.package>org.wso2.carbon.lcm.core.internal.*,</private.package>
         <export.package>
-            !org.wso2.carbon.lcm.internal.*,
+            !org.wso2.carbon.lcm.core.internal.*,
             org.wso2.carbon.lcm.core.*,
         </export.package>
         <import.package>
@@ -180,7 +180,7 @@
             javax.sql; version=0.0.0,
             org.xml.sax; version=0.0.0,
             org.wso2.carbon.kernel.*;version="${carbon.kernel.package.import.version.range}",
-            org.wso2.carbon.lcm.sql.*;version="${carbon.lcm.version}",
+            org.wso2.carbon.lcm.sql.*;version="${carbon.lcm.package.import.version.range}",
             *;
         </import.package>
         <dynamic.import.package>*</dynamic.import.package>
