@@ -49,6 +49,23 @@ public class LifecycleEventManager {
     }
 
     /**
+     * Associates lifecycle with an asset. Sets the initial state as the current state.
+     *
+     * @param lcName       Name of lifecycle which asset being associated with.
+     * @param lifecycleId  Lifecycle ID
+     * @param initialState initial state provided in the scxml configuration.
+     * @param user         The user who invoked the action. This will be used for auditing purposes.
+     */
+    public void associateLifecycle(String lcName, String lifecycleId, String initialState, String user) throws
+            LifecycleException {
+        try {
+            getLCMgtDAOInstance().addLifecycleState(initialState, lifecycleId, lcName, user);
+        } catch (LifecycleManagerDatabaseException e) {
+            throw new LifecycleException("Error while associating lifecycle " + lcName, e);
+        }
+    }
+
+    /**
      * Changes the lifecycle state.
      *
      * @param currentState                  Current state

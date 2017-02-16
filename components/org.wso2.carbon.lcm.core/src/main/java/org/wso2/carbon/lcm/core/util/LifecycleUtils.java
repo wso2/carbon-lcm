@@ -142,6 +142,17 @@ public class LifecycleUtils {
     }
 
     /**
+     * This method is used to get the initial state defined in the lifecycle
+     *
+     * @param lcName : lifecycle name
+     * @return : initial state
+     * @throws LifecycleException : LifecycleException
+     */
+    public static String getInitialState(String lcName) throws LifecycleException {
+        return LifecycleOperationUtil.getInitialState(getLifecycleConfiguration(lcName), lcName);
+    }
+
+    /**
      * This method is used to read lifecycle config and provide permission details associated with each state change.
      *
      * @param lcConfig                          Lifecycle configuration element.
