@@ -77,6 +77,20 @@ public class LifecycleOperationUtil {
     }
 
     /**
+     * This method is used to associate a lifecycle with an asset with lifecycleId as input.
+     *
+     * @param lcName       LC name which associates with the resource.
+     * @param lifecycleId  LC ID.
+     * @param initialState Initial lifecycle state to be set.
+     * @param user         The user who invoked the action. This will be used for auditing purposes.
+     */
+    public static void associateLifecycle(String lcName, String lifecycleId, String initialState, String user) throws
+            LifecycleException {
+        LifecycleEventManager lifecycleEventManager = new LifecycleEventManager();
+        lifecycleEventManager.associateLifecycle(lcName, lifecycleId, initialState, user);
+    }
+
+    /**
      * This method need to call for each and event life cycle state changes.
      *
      * @param currentState              Current state .

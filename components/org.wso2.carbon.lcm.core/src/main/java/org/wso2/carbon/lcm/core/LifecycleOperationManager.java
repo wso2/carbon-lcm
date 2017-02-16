@@ -159,6 +159,34 @@ public class LifecycleOperationManager {
     }
 
     /**
+     * This method is used to associate a lifecycle with an asset. Lifecycle Id can be specified in the request
+     * @param lcName                        LC name which associates with the resource.
+     * @param lifecycleId                   Unique lifecycle ID
+     * @param user                          The user who invoked the action. This will be used for auditing purposes.
+     * @return                              Object of added life cycle state.
+     * @throws LifecycleException  If failed to associate life cycle with asset.
+     */
+    public static LifecycleState addLifecycle(String lcName, String lifecycleId, String user) throws
+            LifecycleException {
+        LifecycleState lifecycleState;
+        Document lcContent = LifecycleUtils.getLifecycleConfiguration(lcName);
+        lifecycleState = new LifecycleState();
+
+        String initialState = getInitialState(lcContent, lcName);
+        lifecycleState.setLcName(lcName);
+        lifecycleState.setState(initialState);
+        populateItems(lifecycleState, lcContent);
+        LifecycleOperationUtil.associateLifecycle(lcName, lifecycleId, initialState, user);
+
+        lifecycleState.setLifecycleId(lifecycleId);
+        if (log.isDebugEnabled()) {
+            log.debug("Id : " + lifecycleId + "associated with lifecycle " + lcName + "and initial state set to "
+                    + initialState);
+        }
+        return lifecycleState;
+    }
+
+    /**
      * This method is used to detach a lifecycle from an asset.
      *
      * @param uuid                      Lifecycle id that maps with the asset.

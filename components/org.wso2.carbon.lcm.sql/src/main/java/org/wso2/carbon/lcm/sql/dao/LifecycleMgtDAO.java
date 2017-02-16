@@ -105,6 +105,53 @@ public class LifecycleMgtDAO {
         return uuid;
     }
 
+
+    /**
+     * Set initial lifecycle state with lifecycle id as input.
+     *
+     * @param initialState                          Initial state provided in lifecycle config.
+     * @param uuid                                  Lifecycle Id;
+     * @param lcName                                Name of the lifecycle
+     * @param user                                  The user who invoked the action. This will be used for
+     *                                              auditing purposes.
+     *                                              external systems.
+     * @throws LifecycleManagerDatabaseException    If failed to add initial lifecycle state.
+     */
+    public void addLifecycleState(String initialState, String uuid, String lcName, String user)
+            throws LifecycleManagerDatabaseException {
+        Connection connection = null;
+        PreparedStatement prepStmt = null;
+        if (uuid == null || uuid.isEmpty()) {
+            handleException("LifecycleId is not found " + lcName);
+        }
+        final String addLifecycleStateSql = "INSERT INTO LC_DATA (LC_STATE_ID,LC_NAME,LC_STATUS) VALUES (?,?,?)";
+        try {
+            connection = LifecycleMgtDBUtil.getConnection();
+            connection.setAutoCommit(false);
+
+            prepStmt = connection.prepareStatement(addLifecycleStateSql);
+            prepStmt.setString(1, uuid);
+            prepStmt.setString(2, lcName);
+            prepStmt.setString(3, initialState);
+            prepStmt.execute();
+            connection.commit();
+            addLifecycleHistory(uuid, null, initialState, user);
+
+        } catch (SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException e1) {
+                log.error("Error while roll back operation for setting initial lifecycle state :" + initialState, e);
+            }
+            handleException("Error while associating the lifecycle " + lcName, e);
+        } finally {
+            LifecycleMgtDBUtil.closeAllConnections(prepStmt, connection, null);
+        }
+    }
+
+
     /**
      * Change lifecycle state.
      *
@@ -442,6 +489,11 @@ public class LifecycleMgtDAO {
     private void handleException(String msg, Throwable t) throws LifecycleManagerDatabaseException {
         log.error(msg, t);
         throw new LifecycleManagerDatabaseException(msg, t);
+    }
+
+    private void handleException(String msg) throws LifecycleManagerDatabaseException {
+        log.error(msg);
+        throw new LifecycleManagerDatabaseException(msg);
     }
 
     private String generateUUID() {
