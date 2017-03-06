@@ -393,7 +393,7 @@ public class LifecycleMgtDAO {
             connection.setAutoCommit(false);
             if (rs.next()) {
                 final String updateCheckListItemData = "UPDATE LC_CHECKLIST_DATA SET CHECKLIST_VALUE=? WHERE "
-                        + "CHECKLIST.LC_STATE_ID=? AND CHECKLIST.LC_STATE=? AND CHECKLIST.CHECKLIST_NAME=?";
+                        + "LC_STATE_ID=? AND LC_STATE=? AND CHECKLIST_NAME=?";
 
                 prepStmt2 = connection.prepareStatement(updateCheckListItemData);
                 prepStmt2.setBoolean(1, value);
