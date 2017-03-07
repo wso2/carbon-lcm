@@ -86,7 +86,7 @@ public interface ManagedLifecycle {
      * purpose of mapping.
      *
      * @param lifecycleState                    Lifecycle state object.
-     *
+     * @throws LifecycleException               If exception occurred while associating lifecycle.
      */
     void associateLifecycle(LifecycleState lifecycleState) throws LifecycleException;
 
@@ -94,7 +94,7 @@ public interface ManagedLifecycle {
      * @param lcName        Name of the lifecycle to be removed.
      * This method should be implemented to remove the lifecycle data from the object which implements this interface.
      * Persisted lifecycle state id (say stored in database) should be removed by implementing this method.
-     *
+     * @throws LifecycleException               If exception occurred while disassociating lifecycle.
      */
     void dissociateLifecycle(String lcName) throws LifecycleException;
 
@@ -102,7 +102,7 @@ public interface ManagedLifecycle {
      * @param lifecycleState        Lifecycle state object.
      * This method should be implemented to update the lifecycle state after state change operation and check list
      * item operation
-     *
+     * @throws LifecycleException               If exception occurred while setting lifecycle state info.
      */
     void setLifecycleStateInfo(LifecycleState lifecycleState) throws LifecycleException;
 

@@ -284,8 +284,8 @@ public class LifecycleDatabaseCreator {
     /**
      * executes given sql
      *
-     * @param sql
-     * @throws LifecycleManagerDatabaseException
+     * @param sql SQL query
+     * @throws LifecycleManagerDatabaseException If failed to execute the query
      */
     @SuppressFBWarnings ("SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE")
     private void executeSQL(String sql) throws LifecycleManagerDatabaseException {

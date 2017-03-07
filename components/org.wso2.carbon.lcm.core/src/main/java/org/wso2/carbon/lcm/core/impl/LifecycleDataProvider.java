@@ -37,7 +37,7 @@ public class LifecycleDataProvider {
      *
      * @param uuid  Lifecycle Id which requires history.
      * @return {@code List<LifecycleHistoryBean>} List of lifecycle history objects.
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to get lifecycle history.
      */
     public static List<LifecycleHistoryBean> getLifecycleHistory(String uuid) throws LifecycleException {
         return LifecycleOperationUtil.getLifecycleHistoryFromId(uuid);
@@ -49,7 +49,7 @@ public class LifecycleDataProvider {
      * @param state                 Filtering state.
      * @param lcName                Name of the relevant lifecycle.
      * @return                      {@code List<LifecycleHistoryBean>} List of lifecycle ids in the given state.
-     * @throws LifecycleException
+     * @throws LifecycleException   If failed to get Ids from state.
      */
     public static List<String> getIdsFromState(String state, String lcName) throws LifecycleException {
         return LifecycleOperationUtil.getLifecycleIds(state, lcName);
@@ -61,7 +61,7 @@ public class LifecycleDataProvider {
      *
      * @param lcName                          Name of the lifecycle.
      * @return Lifecycle config as a graph of states.
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to get lifecycle graph.
      */
     public static List<LifecycleNode> getLifecycleGraph(String lcName) throws LifecycleException {
         Document lcContent = LifecycleUtils.getLifecycleConfiguration(lcName);

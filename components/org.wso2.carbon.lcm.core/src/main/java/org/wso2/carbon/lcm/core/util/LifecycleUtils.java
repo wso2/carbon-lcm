@@ -70,7 +70,7 @@ public class LifecycleUtils {
      *
      * @param lcName                Name of the lifecycle.
      * @return                      Lifecycle configuration.
-     * @throws LifecycleException
+     * @throws LifecycleException   If failed to get lifecycle configurations.
      */
     public static Document getLifecycleConfiguration(String lcName) throws LifecycleException {
         if (lifecycleMap != null && lifecycleMap.containsKey(lcName)) {
@@ -81,8 +81,6 @@ public class LifecycleUtils {
 
     /**
      * Initiates the static lifecycle map during startup.
-     *
-     * @throws LifecycleException
      */
     //TODO : move to seperate class. not util
     public static void initiateLCMap() {
@@ -146,7 +144,7 @@ public class LifecycleUtils {
      *
      * @param lcName : lifecycle name
      * @return : initial state
-     * @throws LifecycleException : LifecycleException
+     * @throws LifecycleException  If failed to get initial state.
      */
     public static String getInitialState(String lcName) throws LifecycleException {
         return LifecycleOperationUtil.getInitialState(getLifecycleConfiguration(lcName), lcName);
@@ -157,7 +155,7 @@ public class LifecycleUtils {
      *
      * @param lcConfig                          Lifecycle configuration element.
      * @return                                  Document element for the lifecycle confi
-     * @throws LifecycleException
+     * @throws LifecycleException               If failed to get lifecycle element.
      */
     public static Document getLifecycleElement(String lcConfig) throws LifecycleException {
 
@@ -248,8 +246,8 @@ public class LifecycleUtils {
 
     /**
      * Method used to get schema validator object for lifecycle configurations.
-     * @param schemaPath               Schema path in the server extracted directory.
-     * @throws LifecycleException
+     * @param schemaPath Schema path in the server extracted directory.
+     * @return schema validator object
      */
     public static synchronized Validator getLifecycleSchemaValidator(String schemaPath) {
         if (lifecycleSchemaValidator != null) {
@@ -276,7 +274,6 @@ public class LifecycleUtils {
     /**
      * This method will return the lifecycle schema location in the server directory.
      * @return schema location.
-     * @throws LifecycleException
      */
     private static String getLifecycleSchemaLocation() {
         return Utils.getCarbonHome() + File.separator + "resources" + File.separator + "lifecycle-config.xsd";
