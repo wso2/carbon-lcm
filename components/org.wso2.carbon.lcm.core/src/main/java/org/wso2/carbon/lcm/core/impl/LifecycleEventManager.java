@@ -38,7 +38,7 @@ public class LifecycleEventManager {
      * @param initialState                  initial state provided in the scxml configuration.
      * @param user                          The user who invoked the action. This will be used for auditing purposes.
      * @return                              uuid generated for that particular asset.
-     * @throws LifecycleException
+     * @throws LifecycleException           If failed associate lifecycle state.
      */
     public String associateLifecycle(String lcName, String initialState, String user) throws LifecycleException {
         try {
@@ -55,6 +55,7 @@ public class LifecycleEventManager {
      * @param lifecycleId  Lifecycle ID
      * @param initialState initial state provided in the scxml configuration.
      * @param user         The user who invoked the action. This will be used for auditing purposes.
+     * @throws LifecycleException  If failed associate lifecycle state.
      */
     public void associateLifecycle(String lcName, String lifecycleId, String initialState, String user) throws
             LifecycleException {
@@ -72,7 +73,7 @@ public class LifecycleEventManager {
      * @param requiredState                 The expected state
      * @param id                            uuid of the current state which maps with the asset.
      * @param user                          The user who invoked the action. This will be used for auditing purposes.
-     * @throws LifecycleException
+     * @throws LifecycleException           If failed to change lifecycle state.
      */
     public void changeLifecycleState(String currentState, String requiredState, String id, String user)
             throws LifecycleException {
@@ -91,7 +92,7 @@ public class LifecycleEventManager {
      * Remove lifecycle state data from LC_DATA table
      *
      * @param uuid                        uuid of the state.
-     * @throws LifecycleException
+     * @throws LifecycleException         If failed to remove lifecycle data.
      */
     public void removeLifecycleStateData(String uuid) throws LifecycleException {
         try {
@@ -106,7 +107,7 @@ public class LifecycleEventManager {
      *
      * @param uuid                        uuid of the state.
      * @return                            Lifecycle state data associated with the uuid.
-     * @throws LifecycleException
+     * @throws LifecycleException         If failed to get lifecycle state data.
      */
     public LifecycleStateBean getLifecycleStateData(String uuid) throws LifecycleException {
         try {
@@ -130,7 +131,7 @@ public class LifecycleEventManager {
      *
      * @param uuid                  Lifecycle Id which requires history.
      * @return                      List of lifecycle history objects.
-     * @throws LifecycleException
+     * @throws LifecycleException   If failed to get lifecycle history from ID.
      */
     public List<LifecycleHistoryBean> getLifecycleHistoryFromId(String uuid) throws LifecycleException {
         try {
@@ -146,7 +147,7 @@ public class LifecycleEventManager {
      * @param state                 Filtering state.
      * @param lcName                Name of the relevant lifecycle.
      * @return                      {@code List<LifecycleHistoryBean>} List of lifecycle ids in the given state.
-     * @throws LifecycleException
+     * @throws LifecycleException   If failed to get lifecycle Ids
      */
     public List<String> getLifecycleIds (String state, String lcName) throws LifecycleException {
         try {

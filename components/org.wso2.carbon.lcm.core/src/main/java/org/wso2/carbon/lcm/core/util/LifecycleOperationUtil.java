@@ -83,6 +83,7 @@ public class LifecycleOperationUtil {
      * @param lifecycleId  LC ID.
      * @param initialState Initial lifecycle state to be set.
      * @param user         The user who invoked the action. This will be used for auditing purposes.
+     * @throws LifecycleException       If exception occurred while associate lifecycle.
      */
     public static void associateLifecycle(String lcName, String lifecycleId, String initialState, String user) throws
             LifecycleException {
@@ -119,8 +120,9 @@ public class LifecycleOperationUtil {
 
     /**
      * Get current life cycle state object.
-     *
+     * @param uuid State uuid which maps with the asset.
      * @return {@code LifecycleState} object represent current life cycle.
+     * @throws LifecycleException If failed to get lifecycle state
      */
     public static LifecycleState getCurrentLifecycleState(String uuid) throws LifecycleException {
         LifecycleState currentLifecycleState = new LifecycleState();
@@ -157,7 +159,7 @@ public class LifecycleOperationUtil {
      *
      * @param uuid  Lifecycle Id which requires history.
      * @return  List of lifecycle history objects.
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to get lifecycle history from id.
      */
     public static List<LifecycleHistoryBean> getLifecycleHistoryFromId(String uuid) throws LifecycleException {
         LifecycleEventManager lifecycleEventManager = new LifecycleEventManager();
@@ -170,7 +172,7 @@ public class LifecycleOperationUtil {
      * @param state                 Filtering state.
      * @param lcName                Name of the relevant lifecycle.
      * @return                      {@code List<LifecycleHistoryBean>} List of lifecycle ids in the given state.
-     * @throws LifecycleException
+     * @throws LifecycleException   if failed to get Ids from state
      */
     public static List<String> getLifecycleIds(String state, String lcName) throws LifecycleException {
         LifecycleEventManager lifecycleEventManager = new LifecycleEventManager();
@@ -229,7 +231,7 @@ public class LifecycleOperationUtil {
      * @param lcConfig                          Lifecycle config document element.
      * @param lcState                           State which requires information.
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
+     * @throws LifecycleException               If failed to config transition inputs.
      */
     public static List<InputBean> populateTransitionInputs(Document lcConfig, String lcState)
             throws LifecycleException {
@@ -277,7 +279,7 @@ public class LifecycleOperationUtil {
      * @param lcConfig                          Lifecycle config document element.
      * @param lcState                           State which requires information.
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
+     * @throws LifecycleException               If failed to populate transition executors.
      */
     public static List<CustomCodeBean> populateTransitionExecutors(Document lcConfig, String lcState)
             throws LifecycleException {
@@ -328,7 +330,7 @@ public class LifecycleOperationUtil {
      * @param lcConfig                          Lifecycle config document element.
      * @param lcName                            Name of lifecycle.
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to get initial lifecycle state.
      */
     public static String getInitialState(Document lcConfig, String lcName) throws LifecycleException {
         try {
@@ -348,7 +350,7 @@ public class LifecycleOperationUtil {
      * @param lcConfig                          Lifecycle config document element.
      * @param lcState                           State which requires information.
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to populate available states.
      */
     public static List<AvailableTransitionBean> populateAvailableStates(Document lcConfig, String lcState)
             throws LifecycleException {
@@ -385,7 +387,7 @@ public class LifecycleOperationUtil {
      * @param lcConfig                          Lifecycle config document element.
      * @param lcState                           State which requires information.
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
+     * @throws LifecycleException               If failed to populate transition permission
      */
     public static List<PermissionBean> populateTransitionPermission(Document lcConfig, String lcState)
             throws LifecycleException {
@@ -461,7 +463,6 @@ public class LifecycleOperationUtil {
      * @param lcState                           State which requires information.
      * @param dataElementName                   Data element (for ex : data name="transitionExecution")
      * @return Lifecycle state bean with state data.
-     * @throws LifecycleException
      */
     public static String buildXPathQuery(String lcState, String dataElementName) {
         return LifecycleConstants.LIFECYCLE_STATE_ELEMENT_WITH_NAME_PATH + lcState + CLOSE_ATTRIBUTE_BRACKET
@@ -474,7 +475,7 @@ public class LifecycleOperationUtil {
      * @param className                         Custom executor class provided in lifecycle config for state change.
      * @param parameterMap                      Parameters provided to executor class.
      * @return Execution class object.
-     * @throws LifecycleException
+     * @throws LifecycleException               If failed to load custom executors.
      */
     public static Executor loadCustomExecutors(String className, Map parameterMap) throws LifecycleException {
 
@@ -495,7 +496,7 @@ public class LifecycleOperationUtil {
      *
      * @param lcConfig                          Lifecycle configuration element.
      * @return Document element for the lifecycle confi
-     * @throws LifecycleException
+     * @throws LifecycleException If failed to get lifecycle element.
      */
     public static Document getLifecycleElement(String lcConfig) throws LifecycleException {
 

@@ -34,13 +34,15 @@ public interface Executor {
      * @param parameterMap Static parameter map given by the user. These are the parameters that have been given in the
      *                     lifecycle configuration as the parameters of the executor.
      *
-     *                     Eg:- <execution forEvent="Promote"
+     *                     Eg:-
+     *                     {@code
+     *                     <execution forEvent="Promote"
      *                     class="org.wso2.carbon.governance.registry.extensions.executors.ServiceVersionExecutor">
                                     <parameter name="currentEnvironment" value="/_system/governance/trunk/"/>
                                     <parameter name="targetEnvironment" value="/_system/governance/branches/testing/"/>
                                     <parameter name="service.mediatype" value="application/vnd.wso2-service+xml"/>
                                 </execution>
-
+    *                       }
                            The parameters defined here are passed to the executor using this method.
      * */
     void init(Map parameterMap);

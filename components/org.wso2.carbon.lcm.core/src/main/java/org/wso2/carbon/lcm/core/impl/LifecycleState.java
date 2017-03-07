@@ -51,7 +51,6 @@ public class LifecycleState {
 
     /**
      * @param state the state of current lifecycle state object.
-     * @return
      */
     public void setState(String state) {
         this.state = state;

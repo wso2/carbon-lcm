@@ -254,7 +254,7 @@ public class LifecycleMgtDAO {
      * @param previousState                 Current state.
      * @param postState                     Target state.
      * @param user                          The user associated with lifecycle operation.
-     * @throws LifecycleManagerDatabaseException
+     * @throws LifecycleManagerDatabaseException If failed to add lifecycle history to db.
      */
     private void addLifecycleHistory(String id, String previousState, String postState, String user) {
         if (!LifecycleConfigBuilder.getLifecycleConfig().isEnableHistory()) {
@@ -302,7 +302,7 @@ public class LifecycleMgtDAO {
      * @param uuid                                  UUID of the lifecycle state. (Associates with asset)
      * @return                                      List of state transitions for given uuid.
      *
-     * @throws LifecycleManagerDatabaseException
+     * @throws LifecycleManagerDatabaseException    If failed to get lifecycle history from db.
      */
     public List<LifecycleHistoryBean> getLifecycleHistoryFromId(String uuid) throws LifecycleManagerDatabaseException {
         Connection connection = null;
@@ -337,7 +337,7 @@ public class LifecycleMgtDAO {
      * Method used to remove lifecycle state data for a given id.
      *
      * @param uuid                                  UUID of the lifecycle state. (Associates with asset)
-     * @throws LifecycleManagerDatabaseException
+     * @throws LifecycleManagerDatabaseException    If failed to delete lifecycle state.
      */
     public void removeLifecycleState (String uuid) throws LifecycleManagerDatabaseException {
         Connection connection = null;
@@ -372,7 +372,7 @@ public class LifecycleMgtDAO {
      * @param checkListName                         Name of the check list in which operation was performed
      * @param value                                 Value of the check list item. (Selected or not selected)
      *
-     * @throws LifecycleManagerDatabaseException
+     * @throws LifecycleManagerDatabaseException    If failed to change check list item data.
      */
     public void changeCheckListItemData(String uuid, String lcState, String checkListName, boolean value)
             throws LifecycleManagerDatabaseException {
@@ -436,8 +436,7 @@ public class LifecycleMgtDAO {
      *
      * @param uuid                                  UUID of the lifecycle state.
      * @param lcState                               State in which the checklist is associated with.
-     *
-     * @throws LifecycleManagerDatabaseException
+     * @throws SQLException                         If failed to execute update query.
      */
     private void clearCheckListItemData(Connection connection, String uuid, String lcState) throws
             SQLException {
@@ -460,7 +459,7 @@ public class LifecycleMgtDAO {
      * @param state`
      * @param lcName
      * @return  List of lifecycle ids in the given state.
-     * @throws LifecycleManagerDatabaseException
+     * @throws LifecycleManagerDatabaseException If failed to get lifecycle ids from database.
      */
     public List<String> getLifecycleIdsFromState(String state, String lcName) throws LifecycleManagerDatabaseException {
         Connection connection = null;

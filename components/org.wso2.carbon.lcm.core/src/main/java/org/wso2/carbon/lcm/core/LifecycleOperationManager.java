@@ -116,7 +116,7 @@ public class LifecycleOperationManager {
      * @param currentState                      The state which the checklist item is associated with.
      * @param checkListItemName                 Name of the check list item as specified in the lc config.
      * @param value                             Value of the check list item. Either selected or not.
-     *
+     * @return updated LifecycleState
      * @throws LifecycleException               If exception occurred while execute life cycle update.
      */
     public static LifecycleState checkListItemEvent(String uuid, String currentState, String checkListItemName,
@@ -198,8 +198,9 @@ public class LifecycleOperationManager {
 
     /**
      * Get current life cycle state object.
-     *
+     * @param uuid uuid of the LifecycleState
      * @return {@code LifecycleState} object represent current life cycle.
+     * @throws LifecycleException
      */
     public static LifecycleState getCurrentLifecycleState(String uuid) throws LifecycleException {
         LifecycleState currentLifecycleState = new LifecycleState();
