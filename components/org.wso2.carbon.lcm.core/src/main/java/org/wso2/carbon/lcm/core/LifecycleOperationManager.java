@@ -46,7 +46,7 @@ public class LifecycleOperationManager {
         }
         if (!validateCheckListItemSelected(currentState, targetState)) {
             throw new LifecycleException(
-                    "Required checklist items are not selected to perform the state transition " + "operation from "
+                    "Required checklist items are not selected to perform the state transition operation from "
                             + currentState.getState() + " to " + targetState);
         }
         String lcName = currentState.getLcName();
@@ -85,11 +85,11 @@ public class LifecycleOperationManager {
         currentLifecycleState.setState(currentState);
         if (!validateTargetState(currentLifecycleState, targetState)) {
             throw new LifecycleException("The specified target state " + targetState + " is not a valid target state. "
-                    + "Can't transit from " + currentState + "to" + targetState);
+                    + "Can't transit from " + currentState + " to " + targetState);
         }
         if (!validateCheckListItemSelected(currentLifecycleState, targetState)) {
             throw new LifecycleException(
-                    "Required checklist items are not selected to perform the state transition " + "operation from "
+                    "Required checklist items are not selected to perform the state transition operation from "
                             + currentLifecycleState.getState() + " to " + targetState);
         }
         String lcName = currentLifecycleState.getLcName();
@@ -152,7 +152,7 @@ public class LifecycleOperationManager {
 
         lifecycleState.setLifecycleId(lifecycleId);
         if (log.isDebugEnabled()) {
-            log.debug("Id : " + lifecycleId + "associated with lifecycle " + lcName + "and initial state set to "
+            log.debug("Id : " + lifecycleId + " associated with lifecycle " + lcName + " and initial state set to "
                     + initialState);
         }
         return lifecycleState;
@@ -180,7 +180,7 @@ public class LifecycleOperationManager {
 
         lifecycleState.setLifecycleId(lifecycleId);
         if (log.isDebugEnabled()) {
-            log.debug("Id : " + lifecycleId + "associated with lifecycle " + lcName + "and initial state set to "
+            log.debug("Id : " + lifecycleId + " associated with lifecycle " + lcName + " and initial state set to "
                     + initialState);
         }
         return lifecycleState;
