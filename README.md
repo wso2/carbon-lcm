@@ -3,7 +3,7 @@
 ---
 |  Branch | Build Status |
 | :------ |:------------ |
-| master  | [![Build Status](https://wso2.org/jenkins/buildStatus/icon?job=carbon-lcm)](https://wso2.org/jenkins/job/carbon-lcm/) |
+| master  | [![Build Status](https://wso2.org/jenkins/buildStatus/icon?job=platform-builds/carbon-lcm)](https://wso2.org/jenkins/job/platform-builds/job/carbon-lcm/) |
 ---
 
 This component provides lifecycle management capability to any of the resource type which requires lifecycle capability.

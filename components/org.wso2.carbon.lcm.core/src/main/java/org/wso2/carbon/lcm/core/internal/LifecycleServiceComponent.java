@@ -26,9 +26,9 @@ import org.osgi.service.jndi.JNDIContextManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.carbon.datasource.core.api.DataSourceService;
+import org.wso2.carbon.kernel.configprovider.ConfigProvider;
 import org.wso2.carbon.lcm.core.util.LifecycleUtils;
 import org.wso2.carbon.lcm.sql.config.LifecycleConfigBuilder;
-import org.wso2.carbon.lcm.sql.config.model.LifecycleConfig;
 import org.wso2.carbon.lcm.sql.exception.LifecycleManagerDatabaseException;
 import org.wso2.carbon.lcm.sql.utils.LifecycleMgtDBUtil;
 
@@ -42,6 +42,7 @@ import org.wso2.carbon.lcm.sql.utils.LifecycleMgtDBUtil;
 public class LifecycleServiceComponent   {
 
     private static Logger  log = LoggerFactory.getLogger(LifecycleServiceComponent.class);
+    private ConfigProvider configProvider;
 
     @Activate
     public void start() {
@@ -71,7 +72,7 @@ public class LifecycleServiceComponent   {
     )
     protected void onJNDIReady(JNDIContextManager service) {
         try {
-            LifecycleConfigBuilder.build(LifecycleConfig::new);
+            LifecycleConfigBuilder.build(configProvider);
             LifecycleMgtDBUtil.initialize();
 
 
@@ -86,6 +87,31 @@ public class LifecycleServiceComponent   {
 
     protected void unregisterDataSourceService(DataSourceService dataSourceService) {
         log.debug("Un registering lifecycle data source");
+    }
+
+    /**
+     * Get the ConfigProvider service.
+     *
+     * @param configProvider the ConfigProvider service that is registered as a service.
+     */
+    @Reference(
+            name = "carbon.config.provider",
+            service = ConfigProvider.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unregisterConfigProvider"
+    )
+    protected void registerConfigProvider(ConfigProvider configProvider) {
+        this.configProvider = configProvider;
+    }
+
+    /**
+     * This is the unbind method, which gets called for ConfigProvider instance un-registrations.
+     *
+     * @param configProvider the ConfigProvider service that get unregistered.
+     */
+    protected void unregisterConfigProvider(ConfigProvider configProvider) {
+        this.configProvider = null;
     }
 
 }

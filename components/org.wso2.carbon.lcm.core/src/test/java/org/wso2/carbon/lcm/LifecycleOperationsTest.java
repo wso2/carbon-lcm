@@ -24,6 +24,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
+import org.wso2.carbon.kernel.configprovider.CarbonConfigurationException;
+import org.wso2.carbon.kernel.configprovider.ConfigProvider;
 import org.wso2.carbon.lcm.constants.TestConstants;
 import org.wso2.carbon.lcm.core.LifecycleOperationManager;
 import org.wso2.carbon.lcm.core.beans.InputBean;
@@ -43,6 +45,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -68,7 +71,17 @@ public class LifecycleOperationsTest {
     protected void setUp() throws Exception {
         String dbConfigPath = System.getProperty("LCManagerDBConfigurationPath");
         setupInitialContext(dbConfigPath);
-        LifecycleConfigBuilder.build(LifecycleConfig::new);
+        LifecycleConfigBuilder.build(new ConfigProvider() {
+
+            @Override public <T> T getConfigurationObject(Class<T> configClass) throws CarbonConfigurationException {
+                T lifecycleConfig = (T) new LifecycleConfig();
+                return lifecycleConfig;
+            }
+
+            @Override public Map getConfigurationMap(String namespace) throws CarbonConfigurationException {
+                return null;
+            }
+        });
         LifecycleUtils.initiateLCMap();
         LifecycleMgtDBUtil.initialize();
         lifecycleMgtDAO = LifecycleMgtDAO.getInstance();

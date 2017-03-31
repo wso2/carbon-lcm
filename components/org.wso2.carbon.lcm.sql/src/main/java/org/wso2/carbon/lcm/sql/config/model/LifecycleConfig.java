@@ -17,13 +17,21 @@
  */
 package org.wso2.carbon.lcm.sql.config.model;
 
+import org.wso2.carbon.kernel.annotations.Configuration;
+import org.wso2.carbon.kernel.annotations.Element;
+import org.wso2.carbon.lcm.sql.constants.Constants;
+
 /**
  * Configuration for Life cycles.
  */
+@Configuration (namespace = "wso2.lifecycle", description = "Life cycle Configuration")
 public class LifecycleConfig {
 
-    private boolean enableHistory;
-    private String dataSourceName;
+    @Element (description = "Enable or disable life cycle history")
+    private boolean enableHistory = true;
+
+    @Element (description = "Provide the jndi name of the lifecycle datasource")
+    private String dataSourceName = Constants.LIFECYCLE_DATASOURCE;
 
     public boolean isEnableHistory() {
         return enableHistory;

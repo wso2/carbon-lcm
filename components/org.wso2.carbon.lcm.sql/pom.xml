@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.carbon.lcm</groupId>
         <artifactId>carbon-lcm</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -42,11 +42,6 @@
             <artifactId>pax-logging-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.orbit.org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${snakeyaml.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.core</artifactId>
         </dependency>
@@ -63,7 +58,6 @@
         <import.package>
             org.slf4j.*;version="${slf4j.logging.package.import.version.range}",
             org.apache.commons.io; version="1.2.0",
-            org.yaml.snakeyaml.*;version="${snakeyaml.version.range}",
             javax.sql; version="0.0.0",
             javax.naming; version="0.0.0",
             org.wso2.carbon.kernel.*;version="${carbon.kernel.package.import.version.range}",
