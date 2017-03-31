@@ -19,25 +19,12 @@ package org.wso2.carbon.lcm.sql.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.carbon.kernel.utils.Utils;
+import org.wso2.carbon.kernel.configprovider.CarbonConfigurationException;
+import org.wso2.carbon.kernel.configprovider.ConfigProvider;
 import org.wso2.carbon.lcm.sql.config.model.LifecycleConfig;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.representer.Representer;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
- * Build Lifecycle Configuration from the YAML file
+ * Build Lifecycle Configuration from the LifecycleConfig bean class.
  */
 public class LifecycleConfigBuilder {
 
@@ -50,62 +37,14 @@ public class LifecycleConfigBuilder {
 
     private static LifecycleConfig lifecycleConfig;
 
-    public static void build(Supplier<LifecycleConfig> defaultConfig) {
-        Optional<String> lifecycleConfigFileContent = readFile(LIFECYCLE_YAML);
-        if (lifecycleConfigFileContent.isPresent()) {
-            Representer representer = new Representer();
-            representer.getPropertyUtils().setSkipMissingProperties(true);
-            Yaml yaml = new Yaml(representer);
-            lifecycleConfig = yaml.loadAs(lifecycleConfigFileContent.get(), LifecycleConfig.class);
-        } else {
-            lifecycleConfig = defaultConfig.get();
+    public static void build(ConfigProvider configProvider) {
+        try {
+            lifecycleConfig = configProvider.getConfigurationObject(LifecycleConfig.class);
+        } catch (CarbonConfigurationException e) {
+            logger.error("Error loading Life cycle configuration");
+            lifecycleConfig = new LifecycleConfig();
         }
     }
 
-    /**
-     * Read file content to a String. The optional will have the file content from the given file in a {@link String}
-     * when the file exists in the system or when it is found in the classpath.
-     *
-     * @param fileName The file name
-     * @return An optional {@link String}
-     */
-    private static Optional<String> readFile(final String fileName) {
-        Optional<File> configFile = getConfigFile(fileName);
-        try (final InputStream in = configFile.isPresent() ?
-                new FileInputStream(configFile.get()) :
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            if (in != null) {
-                try (BufferedReader buffer = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-                        Stream<String> stream = buffer.lines()) {
-                    String fileContent = stream.map(Utils::substituteVariables)
-                            .collect(Collectors.joining(System.lineSeparator()));
-                    return Optional.of(fileContent);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read lines from the file: " + fileName, e);
-        }
-
-        return Optional.empty();
-    }
-
-    /**
-     * Get the configuration file. The optional will have the file only if it exists and if it is a valid file.
-     *
-     * @param fileName The file name
-     * @return An optional {@link File}
-     */
-    private static Optional<File> getConfigFile(final String fileName) {
-        File file = new File(Utils.getCarbonConfigHome().resolve(fileName).toString());
-
-        if (file.exists() && file.isFile()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Configuration file found at {}", file.getAbsolutePath());
-            }
-            return Optional.of(file);
-        } else {
-            return Optional.empty();
-        }
-    }
 
 }
