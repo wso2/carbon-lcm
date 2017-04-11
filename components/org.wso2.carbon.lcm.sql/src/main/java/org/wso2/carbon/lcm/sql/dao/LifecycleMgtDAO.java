@@ -248,6 +248,61 @@ public class LifecycleMgtDAO {
     }
 
     /**
+     * Get lifecycle check list  data for a particular uuid and state.
+     *
+     * @param uuid                                  Reference variable that maps lc data with external system.
+     * @param lcState                               State in which checklist date required.
+     * @return                                      Life cycle state bean with all the required information
+     * @throws LifecycleManagerDatabaseException    If failed to get lifecycle state data.
+     */
+    public LifecycleStateBean getLifecycleCheckListDataFromState(String uuid, String lcState)
+            throws LifecycleManagerDatabaseException {
+        LifecycleStateBean lifecycleStateBean = new LifecycleStateBean();
+        Connection connection = null;
+        PreparedStatement prepStmt = null;
+        PreparedStatement prepStmt2 = null;
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+        final String getLifecycleDataFromIdSql = "SELECT DATA.LC_NAME AS LIFECYCLE_NAME FROM LC_DATA DATA "
+                + "WHERE DATA.LC_STATE_ID=?";
+
+        final String getChecklistData =
+                "SELECT CHECKLIST.CHECKLIST_NAME AS CHECKLIST_NAME, CHECKLIST.CHECKLIST_VALUE AS CHECKLIST_VALUE FROM "
+                        + "LC_CHECKLIST_DATA CHECKLIST WHERE CHECKLIST.LC_STATE_ID=? AND CHECKLIST.LC_STATE=?";
+        try {
+            connection = LifecycleMgtDBUtil.getConnection();
+            prepStmt = connection.prepareStatement(getLifecycleDataFromIdSql);
+            prepStmt.setString(1, uuid);
+            rs = prepStmt.executeQuery();
+            if (rs.next()) {
+                lifecycleStateBean.setLcName(rs.getString(Constants.LIFECYCLE_NAME));
+                lifecycleStateBean.setPostStatus(lcState);
+                lifecycleStateBean.setStateId(uuid);
+
+                prepStmt2 = connection.prepareStatement(getChecklistData);
+                prepStmt2.setString(1, uuid);
+                prepStmt2.setString(2, lcState);
+                rs2 = prepStmt2.executeQuery();
+                Map<String, Boolean> checkListData = new HashMap<>();
+                while (rs2.next()) {
+                    checkListData
+                            .put(rs2.getString(Constants.CHECKLIST_NAME), rs2.getBoolean(Constants.CHECKLIST_VALUE));
+                }
+                lifecycleStateBean.setCheckListData(checkListData);
+            } else {
+                throw new LifecycleManagerDatabaseException("No state data associated with lifecycle id :" + uuid);
+            }
+
+        } catch (SQLException e) {
+            handleException("Error while getting the lifecycle state data for id" + uuid, e);
+        } finally {
+            LifecycleMgtDBUtil.closeAllConnections(prepStmt2, null, rs2);
+            LifecycleMgtDBUtil.closeAllConnections(prepStmt, connection, rs);
+        }
+        return lifecycleStateBean;
+    }
+
+    /**
      * Method used to update lifecycle history tables. Invoked when association and updating lifecycle.
      *
      * @param id                            UUID of the lifecycle state. (Associates with asset)

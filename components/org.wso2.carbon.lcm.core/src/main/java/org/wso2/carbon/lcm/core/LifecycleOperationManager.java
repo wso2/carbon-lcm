@@ -81,8 +81,7 @@ public class LifecycleOperationManager {
             user, Object resource)
             throws LifecycleException {
         LifecycleState nextState = new LifecycleState();
-        LifecycleState currentLifecycleState = LifecycleOperationUtil.getCurrentLifecycleState(uuid);
-        currentLifecycleState.setState(currentState);
+        LifecycleState currentLifecycleState = getLifecycleDataForState(uuid, currentState);
         if (!validateTargetState(currentLifecycleState, targetState)) {
             throw new LifecycleException("The specified target state " + targetState + " is not a valid target state. "
                     + "Can't transit from " + currentState + " to " + targetState);
@@ -210,6 +209,19 @@ public class LifecycleOperationManager {
         currentLifecycleState.setLcName(lcName);
         currentLifecycleState.setLifecycleId(uuid);
         currentLifecycleState.setState(lifecycleStateBean.getPostStatus());
+        populateItems(currentLifecycleState, lcContent);
+        LifecycleOperationUtil.setCheckListItemData(currentLifecycleState, lifecycleStateBean.getCheckListData());
+        return currentLifecycleState;
+    }
+
+    public static LifecycleState getLifecycleDataForState (String uuid, String lcState) throws LifecycleException {
+        LifecycleState currentLifecycleState = new LifecycleState();
+        LifecycleStateBean lifecycleStateBean = LifecycleOperationUtil.getLCDataFromState(uuid, lcState);
+        String lcName = lifecycleStateBean.getLcName();
+        Document lcContent = LifecycleUtils.getLifecycleConfiguration(lcName);
+        currentLifecycleState.setLcName(lcName);
+        currentLifecycleState.setLifecycleId(uuid);
+        currentLifecycleState.setState(lcState);
         populateItems(currentLifecycleState, lcContent);
         LifecycleOperationUtil.setCheckListItemData(currentLifecycleState, lifecycleStateBean.getCheckListData());
         return currentLifecycleState;
