@@ -149,6 +149,19 @@ public class LifecycleOperationUtil {
         return lifecycleEventManager.getLifecycleStateData(uuid);
     }
 
+    /**
+     * This method proived life cycle data related to a particular state.
+     *
+     * @param uuid                              State uuid which maps with the asset.
+     * @param lcState                           State which date required.
+     * @return Lifecycle state bean with state data.
+     * @throws LifecycleException      If exception occurred while life cycle state change.
+     */
+    public static LifecycleStateBean getLCDataFromState(String uuid, String lcState) throws LifecycleException {
+        LifecycleEventManager lifecycleEventManager = new LifecycleEventManager();
+        return lifecycleEventManager.getLifecycleDataFromState(uuid, lcState);
+    }
+
     public static void changeCheckListItem(String uuid, String currentState, String checkListItemName, boolean value)
             throws LifecycleException {
         new LifecycleEventManager().changeCheckListItemData(uuid, currentState, checkListItemName, value);

@@ -117,6 +117,22 @@ public class LifecycleEventManager {
         }
     }
 
+    /**
+     * Get data related to particular uuid and state from LC_CHECKLIST_DATA table
+     *
+     * @param uuid                        uuid of the state.
+     * @param lcState                     State which data is required.
+     * @return                            Lifecycle state data associated with the uuid.
+     * @throws LifecycleException         If failed to get lifecycle state data.
+     */
+    public LifecycleStateBean getLifecycleDataFromState(String uuid, String lcState) throws LifecycleException {
+        try {
+            return getLCMgtDAOInstance().getLifecycleCheckListDataFromState(uuid, lcState);
+        } catch (LifecycleManagerDatabaseException e) {
+            throw new LifecycleException("Error while getting lifecycle data for id : " + uuid);
+        }
+    }
+
     public void changeCheckListItemData(String uuid, String currentState, String checkListItemName, boolean value)
             throws LifecycleException {
         try {
