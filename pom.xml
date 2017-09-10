@@ -27,7 +27,7 @@
 
     <groupId>org.wso2.carbon.lcm</groupId>
     <artifactId>carbon-lcm</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
     <name>Lifecycle Management</name>
     <packaging>pom</packaging>
 
@@ -35,7 +35,7 @@
         <url>https://github.com/wso2/carbon-lcm.git</url>
         <developerConnection>scm:git:https://github.com/wso2/carbon-lcm.git</developerConnection>
         <connection>scm:git:https://github.com/wso2/carbon-lcm.git</connection>
-        <tag>HEAD</tag>
+        <tag>v1.1.2</tag>
     </scm>
 
     <modules>
@@ -168,7 +168,7 @@
     </dependencyManagement>
 
     <properties>
-        <carbon.lcm.version>1.1.2-SNAPSHOT</carbon.lcm.version>
+        <carbon.lcm.version>1.1.2</carbon.lcm.version>
         <carbon.lcm.package.import.version.range>[1.0.0, 2.0.0)</carbon.lcm.package.import.version.range>
         <osgi.framework.import.version.range>[1.8.0, 2.0.0)</osgi.framework.import.version.range>
         <slf4j.logging.package.import.version.range>[1.7.1, 2.0.0)</slf4j.logging.package.import.version.range>
