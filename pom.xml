@@ -159,6 +159,11 @@
                 <artifactId>annotations</artifactId>
                 <version>${findbug.exclude.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.config</groupId>
+                <artifactId>org.wso2.carbon.config</artifactId>
+                <version>${carbon.config.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -167,9 +172,13 @@
         <carbon.lcm.package.import.version.range>[1.0.0, 2.0.0)</carbon.lcm.package.import.version.range>
         <osgi.framework.import.version.range>[1.8.0, 2.0.0)</osgi.framework.import.version.range>
         <slf4j.logging.package.import.version.range>[1.7.1, 2.0.0)</slf4j.logging.package.import.version.range>
-        <carbon.kernel.version>5.2.0-m3</carbon.kernel.version>
+        <carbon.kernel.version>5.2.0-alpha</carbon.kernel.version>
         <carbon.kernel.package.import.version.range>[5.1.0, 6.0.0)</carbon.kernel.package.import.version.range>
-        <carbon.datasources.version>1.1.0</carbon.datasources.version>
+        <carbon.datasources.version>1.1.2</carbon.datasources.version>
+        <carbon.config.version>2.0.5</carbon.config.version>
+        <carbon.config.package.import.version.range>[2.0.0, 3.0.0)</carbon.config.package.import.version.range>
+        <carbon.utils.version>2.0.2</carbon.utils.version>
+        <carbon.utils.package.import.version.range>[2.0.0, 3.0.0)</carbon.utils.package.import.version.range>
         <h2.version>1.4.192</h2.version>
         <testng.version>6.9.10</testng.version>
         <commons-io.version>2.4.0.wso2v1</commons-io.version>

@@ -26,9 +26,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.wso2.carbon.kernel.utils.Utils;
 import org.wso2.carbon.lcm.core.constants.LifecycleConstants;
 import org.wso2.carbon.lcm.core.exception.LifecycleException;
+import org.wso2.carbon.utils.Utils;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;

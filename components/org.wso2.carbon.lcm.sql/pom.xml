@@ -61,6 +61,8 @@
             javax.sql; version="0.0.0",
             javax.naming; version="0.0.0",
             org.wso2.carbon.kernel.*;version="${carbon.kernel.package.import.version.range}",
+            org.wso2.carbon.utils.*;version="${carbon.utils.package.import.version.range}",
+            org.wso2.carbon.config.*;version="${carbon.config.package.import.version.range}",
         </import.package>
     </properties>
 
