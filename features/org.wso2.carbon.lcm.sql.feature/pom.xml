@@ -21,7 +21,7 @@
     <parent>
         <artifactId>carbon-lcm</artifactId>
         <groupId>org.wso2.carbon.lcm</groupId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.2.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -97,7 +97,7 @@
                                     <classpath>
                                         <path refid="h2.classpath" />
                                     </classpath>
-                                    <fileset file="${basedir}/resources/dbscripts/h2/resource.sql" />
+                                    <fileset file="${basedir}/resources/dbscripts/h2.sql" />
                                 </sql>
                                 <echo message="##################### END ########################" />
                             </target>

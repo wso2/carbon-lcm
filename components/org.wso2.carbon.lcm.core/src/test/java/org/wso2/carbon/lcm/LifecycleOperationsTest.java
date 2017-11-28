@@ -68,6 +68,7 @@ public class LifecycleOperationsTest {
 
     @BeforeClass
     protected void setUp() throws Exception {
+        System.setProperty("wso2.runtime.path", "src" + File.separator + "test" + File.separator + "resources");
         String dbConfigPath = System.getProperty("LCManagerDBConfigurationPath");
         setupInitialContext(dbConfigPath);
         LifecycleConfigBuilder.build(new ConfigProvider() {
