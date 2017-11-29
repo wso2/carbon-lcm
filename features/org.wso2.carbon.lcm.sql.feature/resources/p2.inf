@@ -13,11 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ################################################################################
-
+metaRequirements.0.namespace = org.eclipse.equinox.p2.iu
+metaRequirements.0.name = org.wso2.carbon.extensions.touchpoint
 instructions.configure = \
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/dbscripts/,target:${installFolder}/../../dbscripts/lifecycle,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/lifecycle.yaml/,target:${installFolder}/../../conf/lifecycle.yaml,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/lifecycle-datasources.xml/,target:${installFolder}/../../conf/datasources/lifecycle-datasources.xml,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/lifecycle-config.xsd/,target:${installFolder}/../../resources/lifecycle-config.xsd,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/scxml.xsd/,target:${installFolder}/../../resources/scxml.xsd,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/database/WSO2LIFECYCLE_DB.mv.db/,target:${installFolder}/../../database/WSO2LIFECYCLE_DB.mv.db,overwrite:true);\
+org.wso2.carbon.extensions.touchpoint.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/dbscripts/,target:${installFolder}/../{runtime}/dbscripts/lifecycle,overwrite:true);\
+org.wso2.carbon.extensions.touchpoint.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/lifecycle-config.xsd/,target:${installFolder}/../{runtime}/resources/lifecycle-config.xsd,overwrite:true);\
+org.wso2.carbon.extensions.touchpoint.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/conf/scxml.xsd/,target:${installFolder}/../{runtime}/resources/scxml.xsd,overwrite:true);\
+org.wso2.carbon.extensions.touchpoint.copy(source:${installFolder}/../lib/features/org.wso2.carbon.lcm.sql_${feature.version}/database/WSO2LIFECYCLE_DB.mv.db/,target:${installFolder}/../{runtime}/database/WSO2LIFECYCLE_DB.mv.db,overwrite:true);\

@@ -276,10 +276,10 @@ public class LifecycleUtils {
      * @return schema location.
      */
     private static String getLifecycleSchemaLocation() {
-        return Utils.getCarbonHome() + File.separator + "resources" + File.separator + "lifecycle-config.xsd";
+        return Utils.getRuntimePath() + File.separator + "resources" + File.separator + "lifecycle-config.xsd";
     }
 
     private static String getDefaltLifecycleConfigLocation() {
-        return Utils.getCarbonHome() + File.separator + "resources" + File.separator + "lifecycles";
+        return Utils.getRuntimePath() + File.separator + "resources" + File.separator + "lifecycles";
     }
 }

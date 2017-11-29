@@ -21,7 +21,6 @@ package org.wso2.carbon.lcm.sql.utils;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.carbon.lcm.sql.LifecycleDatabaseCreator;
 import org.wso2.carbon.lcm.sql.config.LifecycleConfigBuilder;
 import org.wso2.carbon.lcm.sql.constants.Constants;
 import org.wso2.carbon.lcm.sql.exception.LifecycleManagerDatabaseException;
@@ -55,14 +54,9 @@ public class LifecycleMgtDBUtil {
             if (dataSourceName == null) {
                 dataSourceName = Constants.LIFECYCLE_DATASOURCE;
             }
-
             try {
-
                 Context ctx = new InitialContext();
                 dataSource = (DataSource) ctx.lookup(dataSourceName);
-                LifecycleDatabaseCreator dbInitializer = new LifecycleDatabaseCreator(dataSource);
-
-                dbInitializer.createLifecycleDatabase();
             } catch (NamingException e) {
                 throw new LifecycleManagerDatabaseException(
                         "Error while looking up the data " + "source: " + dataSourceName, e);
